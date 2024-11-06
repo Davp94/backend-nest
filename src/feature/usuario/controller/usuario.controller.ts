@@ -15,7 +15,8 @@ export class UsuarioController {
     }
 
     @Get(':usuarioId')
-    async getUsuarioById(@Param() usuarioId: number): Promise<UsuarioResponseDto>{
+    async getUsuarioById(@Param('usuarioId') usuarioId: number): Promise<UsuarioResponseDto>{
+        console.log("🚀 ~ UsuarioController ~ getUsuarioById ~ usuarioId:", usuarioId);
         return await this.usuarioService.getOneById(usuarioId);
     }
 
@@ -25,12 +26,12 @@ export class UsuarioController {
     }
 
     @Put(':usuarioId')
-    async updateUsuario(@Param() usuarioId: number, @Body() usuarioRequestDto: UsuarioRequestDto): Promise<number>{
+    async updateUsuario(@Param('usuarioId') usuarioId: number, @Body() usuarioRequestDto: UsuarioRequestDto): Promise<number>{
         return await this.usuarioService.updateUsuario(usuarioRequestDto, usuarioId);
     }
 
-    @Delete(':usuarioId')
-    async deleteUsuario(@Param() usuarioId: number): Promise<number>{
-        return await this.usuarioService.deleteUsuario(usuarioId);
+    @Delete(':id')
+    async deleteUsuario(@Param() id: number): Promise<number>{
+        return await this.usuarioService.deleteUsuario(id);
     }
 }

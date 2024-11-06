@@ -69,8 +69,8 @@ export class UsuarioService {
         return usuarioId;
     }
 
-    async deleteUsuario(usuarioId: number): Promise<number> {
-        await this.usuarioRepository.delete(usuarioId);
-        return usuarioId;
+    async deleteUsuario(id: number): Promise<number> {
+        await this.usuarioRepository.delete(id);
+        return id;
     }
 }
