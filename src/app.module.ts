@@ -6,6 +6,7 @@ import { UsuarioModule } from './feature/usuario/usuario.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { entities } from './entity';
 import { APP_PIPE } from '@nestjs/core';
+import { AuthModule } from './authentication/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { APP_PIPE } from '@nestjs/core';
       entities: entities,
       synchronize: true,
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
