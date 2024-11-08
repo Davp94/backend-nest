@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseFilters } from '@nestjs/common';
 import { UsuarioService } from '../service/usuario.service';
 import { UsuarioResponseDto } from '../dto/usuario.response.dto';
 import { UsuarioRequestDto } from '../dto/usuario.request.dto';
+import { HttpExceptionFilter } from 'src/exception/exception.filter';
 
 @Controller('usuario')
+@UseFilters(HttpExceptionFilter)
 export class UsuarioController {
     //A nivel de controlador no puede existir logica de negocio
     // 
