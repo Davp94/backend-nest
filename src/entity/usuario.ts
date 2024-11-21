@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Direccion } from './direccion';
 
 @Entity()
 export class Usuario {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
   @Column("varchar", { length: 150, unique: true })
   nombres: string;
   @Column()
@@ -18,4 +19,7 @@ export class Usuario {
   razonSocial: string;
   @Column()
   nit: string;
+
+  @OneToMany(()=>Direccion, (direccion) => direccion.usuario)
+  direcciones?: Direccion[];
 }

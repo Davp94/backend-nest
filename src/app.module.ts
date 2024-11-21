@@ -11,6 +11,10 @@ import { CryptoModule } from './common/crypto/crypto.module';
 import { AuthMiddleware } from './common/auth/auth.middleware';
 import { UsuarioController } from './feature/usuario/controller/usuario.controller';
 import { HttpExceptionFilter } from './exception/exception.filter';
+import { DireccionModule } from './feature/direccion/direccion.module';
+import { PedidoModule } from './feature/pedido/pedido.module';
+import { DetallePedidoModule } from './feature/detalle-pedido/detalle-pedido.module';
+import { CategoriaModule } from './feature/categoria/categoria.module';
 
 @Module({
   imports: [
@@ -29,6 +33,10 @@ import { HttpExceptionFilter } from './exception/exception.filter';
     }),
     AuthModule,
     CryptoModule,
+    DireccionModule,
+    PedidoModule,
+    DetallePedidoModule,
+    CategoriaModule,
   ],
   controllers: [AppController, UsuarioController],
   providers: [
