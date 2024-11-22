@@ -14,9 +14,6 @@ export class DetallePedido {
   @Column()
   subTotal: number;
 
-  @Column("varchar", { length: 100 })
-  nro: string;
-
   @ManyToOne(()=>Pedido)
   pedido: Pedido;
 
