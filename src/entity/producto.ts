@@ -16,6 +16,9 @@ export class Producto {
   @Column()
   precio: number;
 
+  @Column()
+  img: string;
+
   @ManyToOne(()=>Categoria)
   categoria: Categoria;
 
