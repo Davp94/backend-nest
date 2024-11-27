@@ -19,9 +19,11 @@ export class CreatePedidoService {
             pedido.total = this.calculateTotalPedido(pedidoRequestDto.detallePedido);
             pedido.usuario = await entityManager.findOne(Usuario, {where: {id: pedidoRequestDto.usuarioId}})
             const createdPedido = await entityManager.save(Pedido, pedido);
+            console.log("🚀 ~ CreatePedidoService ~ createdPedido:", createdPedido)
             for(const detallePedido of pedidoRequestDto.detallePedido){
                 await this.detallePedidoService.createDetallePedido(detallePedido, createdPedido.id, entityManager);
             }
+            return {detail: createdPedido}
         } catch (error) {
             throw new HttpException('Error al crear Pedido', HttpStatus.BAD_REQUEST);
         }

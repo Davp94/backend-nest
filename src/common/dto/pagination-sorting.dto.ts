@@ -1,4 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { OrderEnum } from "../constant/order.enum";
+import { IsEnum } from "class-validator";
 
 export class PaginationSortingDto {
     @ApiProperty()
@@ -6,7 +8,8 @@ export class PaginationSortingDto {
     @ApiProperty()
     page: number;
     @ApiProperty()
-    sortDireccion: string;
+    @IsEnum(OrderEnum)
+    sortDireccion: OrderEnum;
     @ApiProperty()
     sortParam: string;
 }

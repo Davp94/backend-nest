@@ -6,6 +6,7 @@ import { ProductoRequestDto } from '../dto/producto.request.dto';
 import { ProductoResponseDto } from '../dto/producto.response.dto';
 import { Categoria } from 'src/entity/categoria';
 import { PaginationSortingDto } from 'src/common/dto/pagination-sorting.dto';
+import { ProductoPaginationResponseDto } from '../dto/product-pagination.response.dto';
 
 @Injectable()
 export class ProductoService {
@@ -14,7 +15,8 @@ export class ProductoService {
 
     }
 
-    async findAllProductos(paginationSortingDto: PaginationSortingDto): Promise<ProductoResponseDto[]>{
+    async findAllProductos(paginationSortingDto: PaginationSortingDto): Promise<ProductoPaginationResponseDto>{
+        let totalRecords = 0;
         const productos: Producto[] = await this.productoRepository.find({
             relations: {categoria: true},
             order: {[paginationSortingDto.sortParam]: paginationSortingDto.sortDireccion},
@@ -22,24 +24,31 @@ export class ProductoService {
             skip: paginationSortingDto.take * paginationSortingDto.page,
             where: {}
         });
-        return productos.map(producto => {
-            return {
-                id: producto.id,
-                categoriaId: producto.categoria.id,
-                nombre: producto.nombre,
-                precio: producto.precio,
-                img: producto.img,
-                descripcion: producto.descripcion
-            }
-        })
+        const totalProducts = await this.productoRepository.find();
+        totalProducts.map(res => totalRecords++);
+        return {
+            totalPages: totalRecords / paginationSortingDto.take,
+            totalRecords: totalRecords,
+            take: paginationSortingDto.take,
+            sortParam: paginationSortingDto.sortParam,
+            content: productos.map(producto => {
+                return {
+                    id: producto.id,
+                    categoriaId: producto.categoria.id,
+                    nombre: producto.nombre,
+                    precio: producto.precio,
+                    img: producto.img,
+                    descripcion: producto.descripcion
+                }
+            })
+        }
     }
 
-    async createProducto(productoRequestDto: ProductoRequestDto): Promise<ProductoResponseDto>{
+    async createProducto(productoRequestDto: ProductoRequestDto, filename: string): Promise<ProductoResponseDto>{
         const producto: Producto = new Producto();
         producto.categoria = await this.categoriaRepository.findOneBy({id: productoRequestDto.categoriaId});
         producto.descripcion = productoRequestDto.descripcion;
-        //TODO add img service
-        producto.img = '';
+        producto.img = filename;
         producto.nombre = productoRequestDto.nombre;
         producto.precio = productoRequestDto.precio;
         const productoSaved = await this.productoRepository.save(producto);

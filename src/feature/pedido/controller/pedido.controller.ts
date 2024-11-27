@@ -17,6 +17,7 @@ export class PedidoController {
             const result = await this.createPedidoService.createPedido(pedidoRequestDto, queryRunner.manager);
             return result;
         } catch (error) {
+            console.log("🚀 ~ PedidoController ~ error:", error)
             await queryRunner.rollbackTransaction();
         } finally {
             await queryRunner.release();
