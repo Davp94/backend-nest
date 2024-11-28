@@ -6,9 +6,13 @@ export class DireccionRequestDto {
     @IsString()
     zona: string;
     @ApiProperty()
-    @IsString()
+    @IsString( {
+        message: 'Calle debe ser un numero entero',
+      })
     calle: string;
     @ApiProperty()
-    @IsString()
+    @IsString( {
+        message: 'Calle debe ser un numero entero',
+      })
     nro: string;
 }

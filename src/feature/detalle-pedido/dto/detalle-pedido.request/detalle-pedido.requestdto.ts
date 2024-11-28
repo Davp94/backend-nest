@@ -7,6 +7,8 @@ export class DetallePedidoRequestDto {
   @IsNumber()
   productoId: number;
 
+  productoNombre?: string;
+
   @ApiProperty()
   @IsNumber()
   subTotal: number;

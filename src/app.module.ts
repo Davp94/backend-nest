@@ -15,6 +15,7 @@ import { DireccionModule } from './feature/direccion/direccion.module';
 import { PedidoModule } from './feature/pedido/pedido.module';
 import { DetallePedidoModule } from './feature/detalle-pedido/detalle-pedido.module';
 import { CategoriaModule } from './feature/categoria/categoria.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -55,4 +56,6 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer){
     consumer.apply(AuthMiddleware).forRoutes();
   }
+
+  constructor(){}
 }

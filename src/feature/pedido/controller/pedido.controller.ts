@@ -12,12 +12,12 @@ export class PedidoController {
     @Post('')
     async createPedido(@Body() pedidoRequestDto: PedidoRequestDto): Promise<any>{
         const queryRunner = this.datasource.createQueryRunner();
-        queryRunner.startTransaction();
+        await queryRunner.startTransaction();
         try {
             const result = await this.createPedidoService.createPedido(pedidoRequestDto, queryRunner.manager);
+            await queryRunner.commitTransaction();
             return result;
         } catch (error) {
-            console.log("🚀 ~ PedidoController ~ error:", error)
             await queryRunner.rollbackTransaction();
         } finally {
             await queryRunner.release();
