@@ -23,7 +23,7 @@ export class ProductoController {
         filename: (req, file, callback) => {
             const suffix = Date.now()+'-'+Math.round(Math.random()*1e9);
             const imgName = file.originalname;
-            callback(null, `${imgName.split('.')[0]}-${suffix}${extname(imgName)}}`)
+            callback(null, `${imgName.split('.')[0]}-${suffix}${extname(imgName)}`)
         }
     })
   }))
@@ -31,7 +31,7 @@ export class ProductoController {
     if(!file){
         throw new HttpException('Archivo no encontrado', HttpStatus.BAD_REQUEST)
     }
-    return { file: file.fileName }
+    return { file: file.filename }
   }
 
   @Get('')
@@ -46,7 +46,7 @@ export class ProductoController {
         filename: (req, file, callback) => {
             const suffix = Date.now()+'-'+Math.round(Math.random()*1e9);
             const imgName = file.originalname;
-            callback(null, `${imgName.split('.')[0]}-${suffix}${extname(imgName)}}`)
+            callback(null, `${imgName.split('.')[0]}-${suffix}${extname(imgName)}`)
         }
     })
   }))
