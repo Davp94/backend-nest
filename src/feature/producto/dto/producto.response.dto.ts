@@ -4,4 +4,7 @@ import { ProductoRequestDto } from './producto.request.dto';
 export class ProductoResponseDto extends ProductoRequestDto{
   @ApiProperty()
   id: number;
+
+  @ApiProperty()
+  nombreCategoria?: string;
 }

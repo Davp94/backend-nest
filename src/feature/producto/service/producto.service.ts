@@ -35,6 +35,7 @@ export class ProductoService {
                 return {
                     id: producto.id,
                     categoriaId: producto.categoria.id,
+                    nombreCategoria: producto.categoria.nombre,
                     nombre: producto.nombre,
                     precio: producto.precio,
                     img: producto.img,
