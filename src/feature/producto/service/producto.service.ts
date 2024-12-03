@@ -27,8 +27,9 @@ export class ProductoService {
         const totalProducts = await this.productoRepository.find();
         totalProducts.map(res => totalRecords++);
         return {
-            totalPages: totalRecords / paginationSortingDto.take,
+            totalPages: paginationSortingDto.take <= totalRecords ? totalRecords / paginationSortingDto.take : 1,
             totalRecords: totalRecords,
+            page: paginationSortingDto.page,
             take: paginationSortingDto.take,
             sortParam: paginationSortingDto.sortParam,
             content: productos.map(producto => {

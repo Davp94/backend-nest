@@ -9,6 +9,10 @@ export class ProductoPaginationResponseDto {
   @ApiProperty()
   totalRecords: number;
 
+
+  @ApiProperty()
+  page: number;
+
   @ApiProperty()
   take: number;
 
