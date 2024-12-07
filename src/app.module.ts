@@ -16,11 +16,13 @@ import { PedidoModule } from './feature/pedido/pedido.module';
 import { DetallePedidoModule } from './feature/detalle-pedido/detalle-pedido.module';
 import { CategoriaModule } from './feature/categoria/categoria.module';
 import { DataSource } from 'typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     UsuarioModule, 
     ProductoModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.HOST,
