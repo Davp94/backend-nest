@@ -18,7 +18,7 @@ export class AuthService {
 
   async authUser(credentials: AuthRequestDto): Promise<AuthResponseDto> {
     const valid: boolean = await this.validateUsuario(credentials);
-    const authResponse: AuthResponseDto = {token: ''};
+    const authResponse: AuthResponseDto = {token: '', usuarioId: 0};
     if(!valid){
         throw new CustomHttpException('Error, credenciales inválidas', HttpStatus.UNAUTHORIZED)
     }
@@ -26,6 +26,7 @@ export class AuthService {
     const payload = {uid: usuario.id, correo: usuario.correo, razonSocial: usuario.razonSocial};
     const token = await this.jwtService.signAsync(payload);
     authResponse.token = token;
+    authResponse.usuarioId = usuario.id;
     return authResponse;
   }
 
